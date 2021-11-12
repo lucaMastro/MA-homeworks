@@ -66,7 +66,7 @@
     \emph{Relazione homework 1}
   }
 }  
-\author{Luca Mastrobattista}
+\author{Luca Mastrobattista\\ Matricola: 0292461}
 \date{}
 \maketitle
 
@@ -93,7 +93,8 @@ un messaggio di posta elettronica all'indirizzo del docente
 
 \newpage
 \section{Ambiente di lavoro}
-Il file eseguibile è stato caricato su Ghidra istallato su un sistema operativo Linux. 
+Il file eseguibile è stato caricato su Ghidra istallato su un sistema operativo Linux. \\
+L'ambiente controllato di utilizzo è un sistema operativo Windows 10 virtualizzato con il software \emph{VirtualBox}. La macchina virtuale è stata creata in questa occasione.
 
 \newpage
 \section{Metodologia}
@@ -109,7 +110,7 @@ Codice macchina fornito dal professore.
 
 
 \subsection{Osservazione del funzionamento}
-Provando ad eseguire l'eseguibile su una macchina virtuale del sistema operativo Windows 10 non è stato ottenuto alcun output. Neanche nel gestore attività viene riportata alcuna informazione. L'applicazione sembra avviarsi e terminare in poco tempo.\newline
+Provando a lanciare l'eseguibile sulla macchina virtuale Windows non è stato ottenuto alcun output. Neanche nel gestore attività viene riportata alcuna informazione. L'applicazione sembra avviarsi e terminare in poco tempo.\newline
 
 \begin{figure}[H]
 \centering\includegraphics[width=\textwidth]{esecution}
@@ -149,13 +150,13 @@ In ogni caso, si può essere sicuri che questa funzione sia stata definita dal p
 	\centering\includegraphics[scale=0.6]{main_ipotetic_tree}\newline
 	 La funzione \func{FUN_00402a30} è un buon canditato ad essere il main.
 \end{figure}
-Una conferma che quella funzione sia effettivamente il \e{main} arriva dalla seguente osservazione. Nella funzione \e{entry}, viene invocata due volte la funzione \e{MSVCRT.DLL::_initterm}, che prende in input due puntatori. Questi puntatori identificano l'inizio e la fine di una tabella di puntatori a funzioni e vengono inizializzati. Delle due invocazioni, è interessante la seconda: gli indirizzi dati in input identificano una tabella di un solo puntatore a funzione che, una volta definito tale, punta alla \emph{LAB\_00401120} che va quindi definita come funzione. Al suo interno viene invocata la funzione \e{MSVCRT.DLL::__getmainargs}. Questa funzione richiama l'analisi della riga di comando e copia gli argomenti del \e{main}. Riceve in input 5 paremetri che sono tutti variabili globali e rappresentano, in ordine:
+Una conferma che quella funzione sia effettivamente il \e{main} arriva dalla seguente osservazione. Nella funzione \e{entry}, viene invocata due volte la funzione \e{MSVCRT.DLL::_initterm}, che prende in input due puntatori. Questi puntatori identificano l'inizio e la fine di una tabella di puntatori a funzioni i cui elementi vengono inizializzati. Delle due invocazioni, è interessante la seconda: gli indirizzi dati in input identificano una tabella di un solo puntatore a funzione che, una volta definito come tale, punta alla \emph{LAB\_00401120} che va quindi definita come funzione. Al suo interno viene invocata la funzione \e{MSVCRT.DLL::__getmainargs}. Questa funzione richiama l'analisi della riga di comando e copia gli argomenti del \e{main}. Riceve in input 5 parametri che sono tutti variabili globali e rappresentano, in ordine:
 \begin{itemize}
 \item L'intero \e{argc}
-\item La amtrice di stringe \e{argv}
-\item Una matrice di stringe \e{_env} che rappresenta le variabili impostate nell'ambiente dell'utente.
-\item Un intero che, e impostato su 1, espande i caratteri jolly negli argomenti della riga di comando o, se impostato su 0, non esegue alcuna operazione.
-\item Un puntatore a \e{_startupinfo}, che contiene altre informazioni da passare alla DLL CRT.
+\item La matrice di stringhe \e{argv}
+\item Una matrice di stringhe \e{_env} che rappresenta le variabili impostate nell'ambiente dell'utente.
+\item Un intero che, se impostato su 1, espande i caratteri jolly negli argomenti della riga di comando o, se impostato a 0, non esegue alcuna operazione.
+\item Un puntatore a \e{_startupinfo}, che contiene altre informazioni da passare alla \e{DLL CRT}.
 \end{itemize}
 La cosa interessante è che i primi due parametri sono passati in input anche alla funzione \func{FUN_00402a30}, proprio in quell'ordine: quella funzione prende in input \e{argc} e \e{argv}, e non può che essere il \e{main}. 
 
@@ -180,7 +181,7 @@ La cosa interessante è che i primi due parametri sono passati in input anche al
 \subsection{FUN\_00402a30\_main}
 
 Questa funzione, dopo aver fatto allineamento a 16 bytes, ne invoca subito un'altra: \func{FUN_004019a0_set_on_exit_actions}, analizzata in seguito.\\
-Poi continua con dei controlli sulla riga comando: effettua \e{argv[argc]} e il risultato viene utilizzato per fare dei controlli. In particolare, se il valore così indicizzato è \Null{}, la funzione ritorna 0, altrimenti verifica il numero dei parametri passati: se è minore di 3, incluso il nome del programma, si imposta a \Null{} il valore di \e{argv[1]} e di \e{argv[2]}. Poi prepara l'invocazione di \e{MSVCRT.DLL::atoi}, che prende in input una stringa e ne restituisci il valore decimale rappresentato. La stringa data in input è il primo parametro a riga comando. Se il valore di ritorno è 0, si memorizza il valore della macro \e{HKEY_LOCAL_MACHINE} in \e{EAX}. Si continua controllando il secondo parametro a riga comando: se è \Null{} si salva in \e{EDX} il valore della stringa \e{"SYSTEM\string\\ControlSet001\string\\Control"}. Questi due registri conterranno i parametri da passare all'invocazione di \func{FUN_004018a0_open_handle_to_reg_key}. Dopo l'invocazione, si controlla il valore ritornato dalla funzione: se è 0, termina, altrimenti salva questo valore nello stack e invoca la funzione \func{FUN_004018a0_open_handle_to_reg_key}. Quando quest'ultima termina, viene ritornato il valore 0.\\
+Poi continua con dei controlli sulla riga comando: effettua \e{argv[argc]} e controlla se il valore così indicizzato è \Null{}; se lo è la funzione ritorna 0, altrimenti verifica il numero dei parametri passati: se è minore di 3, incluso il nome del programma, si imposta a \Null{} il valore di \e{argv[1]} e di \e{argv[2]}. Poi prepara l'invocazione di \e{MSVCRT.DLL::atoi}, che prende in input una stringa e ne restituisce il valore decimale rappresentato. La stringa data in input è il primo parametro a riga comando. Se il valore di ritorno è 0, si memorizza il valore della macro \e{HKEY_LOCAL_MACHINE} in \e{EAX}. Si continua controllando il secondo parametro a riga comando: se è \Null{} si salva in \e{EDX} il valore della stringa \e{"SYSTEM\string\\ControlSet001\string\\Control"}. Questi due registri conterranno i parametri da passare all'invocazione di \func{FUN_004018a0_open_handle_to_reg_key}. Dopo l'invocazione, si controlla il valore ritornato dalla funzione: se è 0, termina, altrimenti salva questo valore nello stack e invoca la funzione \func{FUN_004018a0_open_handle_to_reg_key}. Quando quest'ultima termina, viene ritornato il valore 0.\\
 
 \nota{il primo controllo che viene fatto è:}
 \begin{verbatim}
@@ -191,36 +192,33 @@ else{
 }
 return uvar4	
 \end{verbatim}
-Ma la condizione dell'\texttt{if} è sempre vera: infatti, se al programma sono dati $argc$ parametri, l' $argc-esimo$ sarà sempre \Null{}.
+Ma la condizione dell'\texttt{if} è sempre vera: infatti, se al programma sono dati \emph{argc} parametri, l' \emph{argc-esimo} sarà sempre \Null{}.
 
 
 
 \target{FUN\_004019a0\_set\_on\_exit\_actions}
 \subsection{FUN\_004019a0\_set\_on\_exit\_actions}
 
-La funzione prende il valore della variabile globale \e{DWORD_00405020_one_time_control_label} e controlla se è 0: se non lo è, termina, altrimenti continua impostandolo a 1. Sembra quindi essere una variabile di controllo per evitare che questo codice venga eseguito più di una volta: infatti gli unici riferimenti a questa variabile sono all'interno di questa funzione. Ha senso perché questa funzione è invocata anche dentro \e{entry}. Dopodiché, controlla il valore di un'altra variabile, \e{DAT_00402ac0_my_struct}. In particolare, viene controllato se il suo valore è uguale a -1. Se non lo è, azzera il registro \e{EAX} con un'istruzione di \e{XOR}, e inizia un ciclo. Ad ogni iterazione, il valore di \e{EAX} viene prima salvato in \e{EBX}, poi incrementato di 1, poi moltiplicato per 4 e infine viene usato come offset dal punto base fissato all'indirizzo di \e{DAT_00402ac0_my_struct}. Questo fatto lascia pensare che, in quell'indirizzo, sia memorizzata una struttura dati con componenti tutti della stessa taglia; potrebbe, a questo punto, essere anche un array di interi: sappiamo infatti che il primo elemento è stato confrontato col valore -1. \\
-Il ciclo termina quando viene trovato un offset, multiplo di 4 byte, che indicizza \e{NULL} a partire da \e{DAT_00402ac0_my_struct}. Alla fine di questo ciclo, in \e{EBX} è memorizzato il numero di indirizzi diversi da \e{NULL} successivi a \e{DAT_00402ac0_my_struct}. Se questo valore è diverso da 0, cioè si è trovato almeno un indirizzo valido, parte un altro ciclo in cui vengono effettuate delle \e{CALL}. Le funzioni invocate sono tutte quelle memorizzate negli indirizzi che sono diversi da \e{NULL} trovati precedentemente. \\
+La funzione prende il valore della variabile globale \e{DWORD_00405020_one_time_control_label} e controlla se è 0: se non lo è, termina, altrimenti continua impostandolo a 1. Sembra quindi essere una variabile di controllo per evitare che questo codice venga eseguito più di una volta: infatti gli unici riferimenti a questa variabile sono all'interno di questa funzione, che viene invocata anche da \e{entry}. Dopodiché, controlla il valore di un'altra variabile, \e{DAT_00402ac0_my_struct}. In particolare, viene controllato se il suo valore è uguale a -1. Se non lo è, azzera il registro \e{EAX} con un'istruzione di \e{XOR}, e inizia un ciclo. Ad ogni iterazione, il valore di \e{EAX} viene prima salvato in \e{EBX}, poi incrementato di 1, poi moltiplicato per 4 e infine viene usato come offset dal punto base fissato all'indirizzo di \e{DAT_00402ac0_my_struct}. Questo fatto lascia pensare che, in quell'indirizzo, sia memorizzata una struttura dati con componenti tutti della stessa taglia; potrebbe, a questo punto, essere anche un array di interi: sappiamo infatti che il primo elemento è stato confrontato col valore -1. \\
+Il ciclo termina quando viene trovato un offset, multiplo di 4 byte, che indicizza un valore 0 a partire da \e{DAT_00402ac0_my_struct}. Alla fine di questo ciclo, in \e{EBX} è memorizzato il numero di indirizzi diversi da \e{NULL} successivi a \e{DAT_00402ac0_my_struct}. Se questo valore è diverso da 0, cioè si è trovato almeno un indirizzo valido, parte un altro ciclo in cui vengono effettuate delle \e{CALL}. Le funzioni invocate sono tutte quelle memorizzate negli indirizzi che sono diversi da \e{NULL} trovati precedentemente. \\
 A questo punto, la nostra \e{my\_struct} è definita così:
 \begin{figure}[H]
 \centering\includegraphics[width=\textwidth]{my_struct}\\
 \end{figure}
 Il vettore di puntatori a funzioni è definito di dimensione 2 perché è il minimo valore che permette di avere una funzione da invocare e il \Null{} per indicarne la fine. A questo punto dell'analisi non è nota la sua dimensione reale. Inoltre, la struttura dati all'indirizzo \e{DAT_00402ac0_my_struct}, contiene un intero al primo campo, l'indirizzo della funzione \func{FUN_00401500_in_my_struct}, e poi un \Null{}: effettivamente l'array ha solo 2 elementi. \\
 
-Quando queste invocazioni terminano e il ciclo finisce, la funzione inserisce l'indirizzo di una funzione nello stack (\func{FUN_00401900_given_to_set_before_exit}), alla posizione \e{-0x1c} e invocherà poi \func{FUN_004014e0_set_before_exit} prima di terminare.\\
-
-\nota{lo stack pointer viene cambiato come prima istruzione di \func{FUN_004014e0_set_before_exit}, che alloca proprio \e{0x1c} bytes; quindi il primo parametro di quella funzione corrisponderà al valore inserito in questo offset.}
-
+Quando queste invocazioni terminano e il ciclo finisce, viene inserito nello stack l'indirizzo della funzione \func{FUN_00401900_given_to_set_before_exit}, alla posizione \e{-0x1c};  viene poi invocata \func{FUN_004014e0_set_before_exit} prima di terminare.\\
 
 \target{FUN\_00401500\_in\_my\_struct}
 \subsection{FUN\_00401500\_in\_my\_struct}
-Questa funzione era marcata come \e{UndefinedFunction} dal decompilatore perché non viene trovata una \e{CALL} che invoca direttamente questa funzione ed è l'unica presente nell'array di vettori nell'istanza di \e{my_struct} all'indirizzo \e{DAT_00402ac0_my_struct}. L'unica cosa che fa è invocare \func{FUN_004014e0_set_before_exit}, a cui viene passato in input il valore di \e{DAT_00401520}. Poiché, come vedremo, \func{FUN_004014e0_set_before_exit} prende in input un puntatore a funzione, possiamo dedurre che il valore della variabile \e{DAT_00401520} è un puntatore a funzione.\\
+Questa funzione era marcata come \e{UndefinedFunction} dal decompilatore perché non viene trovata una \e{CALL} che invoca direttamente questa funzione ed è l'unica presente nell'array di vettori nell'istanza di \e{my_struct} all'indirizzo \e{DAT_00402ac0_my_struct}. L'unica cosa che fa è invocare \func{FUN_004014e0_set_before_exit}, a cui viene passato in input il valore puntato da \e{PTR_DAT_00401520}. Poiché, come vedremo, \func{FUN_004014e0_set_before_exit} prende in input un puntatore a funzione, possiamo dedurre che il valore della variabile \e{PTR_DAT_00401520} è un puntatore a funzione.\\
 
-\textbf{Problema}: convertendo la variabile \e{DAT_00401520} in tipo di dato \emph{pointer}, viene indicizzato un indirizzo che non è presente nell'address space. Tuttavia questo valore è passato a \e{_onexit}, che prende in input un puntatore a funzione e non può quindi essere di un altro tipo.
+\textbf{Problema}: convertendo la variabile \e{PTR_DAT_00401520} in tipo di dato \emph{pointer}, viene indicizzato un indirizzo che non è presente nell'address space. Tuttavia questo valore è passato a \e{_onexit}, che prende in input un puntatore a funzione e non può quindi essere di un altro tipo.
 
 \target{FUN\_00401900\_given\_to\_set\_before\_exit}
 \subsection{FUN\_00401900\_given\_to\_set\_before\_exit}
 
-Questa funzione, per prima cosa, carica un indirizzo dentro il registro \e{EAX}. Questo indirizzo, chiamato \e{PTR_PTR_00403004}, è un puntatore doppio. Infatti, subito dopo, viene preso l'indirizzo puntato e si controlla se questo sia \Null{}. Se lo è, termina, altrimenti inizia un ciclo che, come prima istruzione, prevede una \e{CALL} proprio a quell'indirizzo. Di conseguenza, il valore puntato da \e{PTR_DAT_00403004} è un puntatore a funzione. \\
+Questa funzione, per prima cosa, carica un indirizzo dentro il registro \e{EAX}. Questo indirizzo, chiamato \e{PTR_PTR_00403004}, è un puntatore doppio. Infatti, subito dopo, viene preso l'indirizzo puntato e si controlla se questo sia \Null{}. Se lo è, termina, altrimenti inizia un ciclo che, come prima istruzione, prevede una \e{CALL} proprio a quell'indirizzo. Di conseguenza, il valore puntato da \e{PTR_PTR_00403004} è un puntatore a funzione. \\
 Nelle iterazioni si sposta di 4 bytes in avanti rispetto all' ultimo indirizzo usato nella \e{CALL} e, se non è \Null{}, procede con la sua invocazione. Si sta praticamente scorrendo un ipotetico array di puntatori a funzioni. Il ciclo termina quando viene trovato un puntatore a \Null{}; quando ciò accade la funzione ritorna.\\
 
 \target{Nota}

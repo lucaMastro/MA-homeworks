@@ -1,0 +1,115 @@
+!This program cannot be run in DOS mode.
+.text
+`data
+`.data
+.rdata
+@.bss
+.idata
+tgv8
+[^_]
+[^_]
+[^_]
+[^_]
+$(`@
+[^_]
+[^_]
+%,r@
+%(r@
+%0r@
+%Hr@
+% r@
+%4r@
+%Lr@
+%Pr@
+%Dr@
+%<r@
+%@r@
+%8r@
+%$r@
+%tq@
+%pq@
+%lq@
+|$&3u
+|$'Ru
+|$(nu
+|$)E
+|$*Su
+|$+t
+|$,0u
+|$-!
+|$.?u
+Escape from Windows v2 - M. Cesati, 2010
+EDIT
+CreateWindow failed
+BUTTON
+Time before Windows shutdown:
+days
+hours
+minutes
+Unlock code:
+WARNING: there will be no shutdown without the proper unlock code!
+ 0 seconds
+%2ld seconds
+Stop
+Sorry, try again!
+Shutdown time has come!
+However, the unlock code is wrong.
+If you want the full version of this wonderful tool,
+you can get the unlock code for just ten bucks!
+Ask to the nearest teacher around you!
+SeShutdownPrivilege
+AdjustTokenPrivileges
+LookupPrivilegeValueA
+OpenProcessToken
+TextOutA
+ExitProcess
+FatalAppExitA
+GetCommandLineA
+GetCurrentProcess
+GetLastError
+GetModuleHandleA
+GetStartupInfoA
+SetUnhandledExceptionFilter
+__getmainargs
+__p__environ
+__p__fmode
+__set_app_type
+_cexit
+_iob
+_onexit
+_setmode
+_vsnprintf
+atexit
+signal
+BeginPaint
+CreateWindowExA
+DefWindowProcA
+DispatchMessageA
+DrawTextA
+EndPaint
+ExitWindowsEx
+GetClientRect
+GetDlgItemInt
+GetDlgItemTextA
+GetMessageA
+GetWindowLongA
+KillTimer
+LoadCursorA
+LoadIconA
+MessageBoxA
+MoveWindow
+PostQuitMessage
+RedrawWindow
+RegisterClassExA
+SendDlgItemMessageA
+SetDlgItemInt
+SetDlgItemTextA
+SetTimer
+SetWindowLongA
+ShowWindow
+TranslateMessage
+ADVAPI32.DLL
+GDI32.dll
+KERNEL32.dll
+msvcrt.dll
+USER32.dll

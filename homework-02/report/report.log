@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2021.10.18)  26 OCT 2021 20:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2021.11.3)  11 NOV 2021 17:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **report.tex
 (./report.tex
 LaTeX2e <2017-04-15>
-Babel <3.18> and hyphenation patterns for 10 language(s) loaded.
+Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
@@ -577,22 +577,22 @@ Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 ) (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Info: Redefining \it@ocap on input line 62.
-LaTeX Info: Redefining \it@ccap on input line 62.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Info: Redefining \it@ocap on input line 68.
+LaTeX Info: Redefining \it@ccap on input line 68.
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count107
@@ -624,7 +624,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box29
-Package hyperref Info: Link coloring ON on input line 62.
+Package hyperref Info: Link coloring ON on input line 68.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -634,384 +634,228 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count113
 )
-LaTeX Info: Redefining \ref on input line 62.
-LaTeX Info: Redefining \pageref on input line 62.
-LaTeX Info: Redefining \nameref on input line 62.
+LaTeX Info: Redefining \ref on input line 68.
+LaTeX Info: Redefining \pageref on input line 68.
+LaTeX Info: Redefining \nameref on input line 68.
 
 (./report.out) (./report.out)
 \@outlinefile=\write4
 \openout4 = `report.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 72.
+LaTeX Font Info:    Try loading font information for U+msa on input line 78.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 72.
+LaTeX Font Info:    Try loading font information for U+msb on input line 78.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (./report.toc)
+) (./report.toc
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
 \tf@toc=\write5
 \openout5 = `report.toc'.
 
-
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 113--114
-
+ [2]
+Underfull \hbox (badness 10000) in paragraph at lines 83--90
+\T1/cmr/m/n/12 Analizzare con Ghi-dra, uti-liz-zan-do lo stru-men-to di-sas-sem
+-bla-to-
  []
 
-<./images/esecution.png, id=146, 1007.765pt x 693.59125pt>
-File: ./images/esecution.png Graphic file (type png)
-<use ./images/esecution.png>
-Package pdftex.def Info: ./images/esecution.png  used on input line 116.
-(pdftex.def)             Requested size: 390.0pt x 268.41458pt.
-[4]
-<./images/Import_Results_Summary.png, id=152, 983.675pt x 900.36375pt>
-File: ./images/Import_Results_Summary.png Graphic file (type png)
-<use ./images/Import_Results_Summary.png>
-Package pdftex.def Info: ./images/Import_Results_Summary.png  used on input lin
-e 124.
-(pdftex.def)             Requested size: 390.0pt x 356.96555pt.
- [5 <./images/esecution.png>]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 128.
+[3] [4]
+<./images/lauch_of_program.png, id=171, 492.84125pt x 204.765pt>
+File: ./images/lauch_of_program.png Graphic file (type png)
+<use ./images/lauch_of_program.png>
+Package pdftex.def Info: ./images/lauch_of_program.png  used on input line 120.
+
+(pdftex.def)             Requested size: 197.133pt x 81.90454pt.
+<./images/error_code_ad.png, id=173, 360.34625pt x 226.8475pt>
+File: ./images/error_code_ad.png Graphic file (type png)
+<use ./images/error_code_ad.png>
+Package pdftex.def Info: ./images/error_code_ad.png  used on input line 124.
+(pdftex.def)             Requested size: 144.13594pt x 90.73738pt.
+ [5 <./images/lauch_of_program.png> <./images/error_code_ad.png>]
+<./images/import_summary.png, id=180, 821.0675pt x 879.285pt>
+File: ./images/import_summary.png Graphic file (type png)
+<use ./images/import_summary.png>
+Package pdftex.def Info: ./images/import_summary.png  used on input line 132.
+(pdftex.def)             Requested size: 390.0pt x 417.6513pt.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 136.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-Overfull \hbox (23.624pt too wide) in paragraph at lines 142--142
+Overfull \hbox (23.624pt too wide) in paragraph at lines 156--156
 []\T1/cmtt/m/n/12 -----[] Loading[] /home/luca/Scrivania/MA/homeworks/homework-
-01/hw1.exe[]
+02/hw2.exe[]
  []
 
-[6 <./images/Import_Results_Summary.png>] [7]
-<./images/main_ipotetic_tree.png, id=171, 191.71625pt x 385.44pt>
-File: ./images/main_ipotetic_tree.png Graphic file (type png)
-<use ./images/main_ipotetic_tree.png>
-Package pdftex.def Info: ./images/main_ipotetic_tree.png  used on input line 15
-0.
-(pdftex.def)             Requested size: 115.03062pt x 231.26578pt.
- [8 <./images/main_ipotetic_tree.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 155.
+[6 <./images/import_summary.png>] [7] [8]
+<./images/struct_after_wm_create.png, id=202, 1202.4925pt x 202.7575pt>
+File: ./images/struct_after_wm_create.png Graphic file (type png)
+<use ./images/struct_after_wm_create.png>
+Package pdftex.def Info: ./images/struct_after_wm_create.png  used on input lin
+e 176.
+(pdftex.def)             Requested size: 390.0pt x 65.75928pt.
+ [9]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 183.
 
- (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 155.
-<./images/main_call_graph_pre_analisi.png, id=181, 883.3pt x 529.98pt>
-File: ./images/main_call_graph_pre_analisi.png Graphic file (type png)
-<use ./images/main_call_graph_pre_analisi.png>
-Package pdftex.def Info: ./images/main_call_graph_pre_analisi.png  used on inpu
-t line 167.
-(pdftex.def)             Requested size: 390.0pt x 234.0006pt.
- [9]
-<./images/main_call_graph.png, id=187, 1103.12125pt x 572.1375pt>
-File: ./images/main_call_graph.png Graphic file (type png)
-<use ./images/main_call_graph.png>
-Package pdftex.def Info: ./images/main_call_graph.png  used on input line 172.
-(pdftex.def)             Requested size: 390.0pt x 202.2765pt.
- [10 <./images/main_call_graph_pre_analisi.png> <./images/main_call_graph.png>]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 183.
 
-Underfull \hbox (badness 10000) in paragraph at lines 183--185
-
+Underfull \hbox (badness 1394) in paragraph at lines 185--186
+[]\T1/cmr/m/n/12 una se-rie di pa-ra-me-tri che ser-vo-no a for-mat-ta-re la st
+rin-ga da
  []
 
-<./images/my_struct.png, id=197, 1201.48875pt x 129.48375pt>
-File: ./images/my_struct.png Graphic file (type png)
-<use ./images/my_struct.png>
-Package pdftex.def Info: ./images/my_struct.png  used on input line 206.
-(pdftex.def)             Requested size: 390.0pt x 42.03033pt.
+<./images/struct_after_wm_create_and_init.png, id=210, 1204.5pt x 386.44376pt>
+File: ./images/struct_after_wm_create_and_init.png Graphic file (type png)
+<use ./images/struct_after_wm_create_and_init.png>
+Package pdftex.def Info: ./images/struct_after_wm_create_and_init.png  used on 
+input line 190.
+(pdftex.def)             Requested size: 390.0pt x 125.12689pt.
+[10 <./images/struct_after_wm_create.png>] [11 <./images/struct_after_wm_create
+_and_init.png>]
+<./images/struct_after_wm_create_and_init_and_timer.png, id=226, 1201.48875pt x
+ 331.2375pt>
+File: ./images/struct_after_wm_create_and_init_and_timer.png Graphic file (type
+ png)
+<use ./images/struct_after_wm_create_and_init_and_timer.png>
+Package pdftex.def Info: ./images/struct_after_wm_create_and_init_and_timer.png
+  used on input line 216.
+(pdftex.def)             Requested size: 390.0pt x 107.51949pt.
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 223.
+<./images/struct_func_pointer.png, id=228, 1201.48875pt x 331.2375pt>
+File: ./images/struct_func_pointer.png Graphic file (type png)
+<use ./images/struct_func_pointer.png>
+Package pdftex.def Info: ./images/struct_func_pointer.png  used on input line 2
+26.
+(pdftex.def)             Requested size: 390.0pt x 107.51949pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--207
-\T1/cmr/m/n/12 La fun-zio-ne pren-de il va-lo-re del-la va-ria-bi-le glo-ba-le
- []
-
-[11]
-Underfull \hbox (badness 1102) in paragraph at lines 208--209
-\T1/cmr/m/n/12 e il \T1/cmtt/m/n/12 NULL \T1/cmr/m/n/12 per in-di-car-ne la fi-
-ne. A que-sto pun-to del-l'a-na-li-si non è
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 208--209
-
+Underfull \hbox (badness 6016) in paragraph at lines 223--227
+ \T1/cmr/bx/n/12 4.2.1.4 FUN_00401c7b_timer_proc[][] \T1/cmr/m/n/12 Que-sta fun
+-zio-ne, per pri-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 210--211
+Underfull \hbox (badness 1762) in paragraph at lines 223--227
+\T1/cmr/m/n/12 ma co-sa, in-cre-men-ta il cam-po \T1/cmtt/m/n/12 elapsed_second
+s \T1/cmr/m/n/12 del-la strut-tu-ra da-
+ []
+
+
+Underfull \hbox (badness 3260) in paragraph at lines 223--227
+\T1/cmr/m/n/12 ti \T1/cmtt/m/n/12 struct_appds\T1/cmr/m/n/12 . Se è di-ver-so d
+a 0, ag-gior-na con la fun-zio-ne
+ []
+
+
+Underfull \hbox (badness 1112) in paragraph at lines 229--231
+\T1/cmr/m/n/12 a [][]\T1/cmtt/m/n/12 FUN_00401aab_init_ds[][]\T1/cmr/m/n/12 , v
+e-dia-mo che il cam-po del-la strut-tu-ra da-ti
+ []
+
+[12 <./images/struct_after_wm_create_and_init_and_timer.png> <./images/struct_f
+unc_pointer.png>]
+Underfull \hbox (badness 6876) in paragraph at lines 234--235
+\T1/cmr/m/n/12 Ini-zia-liz-za il cam-po \T1/cmtt/m/n/12 init_0_bis \T1/cmr/m/n/
+12 a 0 e poi in-vo-ca la fun-zio-ne
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 241--242
 
  []
 
 
-Underfull \hbox (badness 3118) in paragraph at lines 214--215
-\T1/cmr/m/n/12 Questa fun-zio-ne era mar-ca-ta co-me \T1/cmtt/m/n/12 UndefinedF
-unction \T1/cmr/m/n/12 dal de-com-
+Underfull \hbox (badness 10000) in paragraph at lines 246--247
+[]\T1/cmtt/m/n/12 LookupPrivilegeValueA\T1/cmr/m/n/12 , per re-cu-pe-ra-re il \
+T1/cmtt/m/n/12 locally unique
  []
 
 
-Underfull \hbox (badness 1342) in paragraph at lines 214--215
-\T1/cmr/m/n/12 pi-la-to-re per-ché non vie-ne tro-va-ta una \T1/cmtt/m/n/12 CAL
-L \T1/cmr/m/n/12 che in-vo-ca di-ret-ta-men-te
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 214--215
-
- []
-
-[12 <./images/my_struct.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 221--223
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 229--230
-\T1/cmr/m/n/12 Questa fun-zio-ne in-vo-ca al suo in-ter-no la fun-zio-ne di li-
-bre-ria
+Underfull \hbox (badness 3068) in paragraph at lines 246--247
+\T1/cmtt/m/n/12 identifier (LUID) \T1/cmr/m/n/12 usa-to sul si-ste-ma lo-ca-le 
+(iden-ti-fi-ca-to dal-la
  []
 
 [13]
-<./images/set_before_exit.png, id=225, 577.15625pt x 442.65375pt>
-File: ./images/set_before_exit.png Graphic file (type png)
-<use ./images/set_before_exit.png>
-Package pdftex.def Info: ./images/set_before_exit.png  used on input line 266.
-(pdftex.def)             Requested size: 230.8584pt x 177.05835pt.
-
-Underfull \hbox (badness 1205) in paragraph at lines 264--268
-[]\T1/cmr/m/n/12 È uti-le quin-di ri-cer-ca-re tut-ti i pun-ti in cui que-sta f
-un-zio-ne vie-
+Underfull \hbox (badness 10000) in paragraph at lines 248--249
+\T1/cmr/m/n/12 Se que-ste in-vo-ca-zio-ni non fal-li-sco-no, vie-ne fi-nal-men-
+te in-vo-ca-ta
  []
 
 
-Underfull \hbox (badness 2662) in paragraph at lines 264--268
-\T1/cmr/m/n/12 ne in-vo-ca-ta. Ci so-no so-lo 2 ri-fe-ri-men-ti, en-tram-bi nel
--la fun-zio-ne
+Underfull \hbox (badness 10000) in paragraph at lines 248--249
+
  []
 
 
-Underfull \hbox (badness 1558) in paragraph at lines 264--268
-[][]\T1/cmtt/m/n/12 FUN_004019a0_set_on_exit_actions[][]\T1/cmr/m/n/12 : uno è 
-di-ret-to, l'al-tro in-ve-ce è
+Underfull \hbox (badness 10000) in paragraph at lines 250--251
+
  []
 
+<./images/struct_appds_completa.png, id=253, 1202.4925pt x 328.22626pt>
+File: ./images/struct_appds_completa.png Graphic file (type png)
+<use ./images/struct_appds_completa.png>
+Package pdftex.def Info: ./images/struct_appds_completa.png  used on input line
+ 274.
+(pdftex.def)             Requested size: 390.0pt x 106.45189pt.
 [14]
-Underfull \hbox (badness 1902) in paragraph at lines 273--274
-[][][]\T1/cmtt/m/n/12 FUN_00401500_in_my_struct[][]\T1/cmr/m/n/12 , che pe-rò u
-ti-li-za un in-di-riz-zo non
+Underfull \hbox (badness 10000) in paragraph at lines 281--282
+ \T1/cmr/bx/n/12 4.2.3.2 FUN_00401cf4_compute_shutdown_time[][] \T1/cmr/m/n/12 
+Que-sta fun-
  []
 
-
-Underfull \hbox (badness 1776) in paragraph at lines 273--274
-\T1/cmr/m/n/12 pre-sen-te nel-l'ad-dress spa-ce: \T1/cmtt/m/n/12 PTR_DAT_004015
-20 \T1/cmr/m/n/12 ha co-me va-lo-re
- []
-
-[15 <./images/set_before_exit.png>]
-Underfull \hbox (badness 1755) in paragraph at lines 290--291
-[]\T1/cmr/m/it/12 Riassumendo\T1/cmr/m/n/12 : si apre il \T1/cmr/m/it/12 re-gi-
-stry key path \T1/cmr/m/n/12 da-to da ri-ga co-man-
- []
-
-
-Underfull \hbox (badness 3895) in paragraph at lines 290--291
-\T1/cmr/m/n/12 do ot-te-nen-do un \T1/cmr/m/it/12 hand-le \T1/cmr/m/n/12 ver-so
- il re-gi-stro tra-mi-te l'in-vo-ca-zio-ne di
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 294--297
-
- []
-
-<./images/malloc_invocations.png, id=248, 1030.85126pt x 743.77875pt>
-File: ./images/malloc_invocations.png Graphic file (type png)
-<use ./images/malloc_invocations.png>
-Package pdftex.def Info: ./images/malloc_invocations.png  used on input line 30
-0.
-(pdftex.def)             Requested size: 412.33319pt x 297.50623pt.
-
-Overfull \hbox (22.33319pt too wide) in paragraph at lines 300--300
- [][] 
- []
-
-[16]
-Underfull \hbox (badness 10000) in paragraph at lines 304--307
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 309--310
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 311--313
-[]\T1/cmr/m/n/12 Il co-di-ce con-ti-nua pre-pa-ran-do l'in-vo-ca-zio-ne del-la 
-fun-zio-ne
- []
-
-[17 <./images/malloc_invocations.png>]
-<./images/all_subkey_info_keeper_not_full.png, id=264, 1205.50375pt x 419.5675p
-t>
-File: ./images/all_subkey_info_keeper_not_full.png Graphic file (type png)
-<use ./images/all_subkey_info_keeper_not_full.png>
-Package pdftex.def Info: ./images/all_subkey_info_keeper_not_full.png  used on 
-input line 341.
-(pdftex.def)             Requested size: 390.0pt x 135.73682pt.
- [18]
-Underfull \hbox (badness 10000) in paragraph at lines 346--349
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 350--351
-
- []
-
-<./images/helper_retrieve_subkeys_not_full.png, id=282, 1202.4925pt x 223.83624
-pt>
-File: ./images/helper_retrieve_subkeys_not_full.png Graphic file (type png)
-<use ./images/helper_retrieve_subkeys_not_full.png>
-Package pdftex.def Info: ./images/helper_retrieve_subkeys_not_full.png  used on
- input line 355.
-(pdftex.def)             Requested size: 390.0pt x 72.59563pt.
-[19 <./images/all_subkey_info_keeper_not_full.png>] [20 <./images/helper_retrie
-ve_subkeys_not_full.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 374--375
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 377--378
-
- []
-
-[21]
-Underfull \hbox (badness 10000) in paragraph at lines 383--384
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 385--386
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 387--388
-
- []
-
-[22]
-Underfull \hbox (badness 10000) in paragraph at lines 400--402
-
- []
-
-
-Underfull \hbox (badness 1127) in paragraph at lines 403--404
-[]\T1/cmr/m/n/12 Una vol-ta usci-ti dal ci-clo, si me-mo-riz-za il va-lo-re sal
--va-to nel re-
- []
-
-
-Underfull \hbox (badness 1675) in paragraph at lines 403--404
-\T1/cmr/m/n/12 gi-stro \T1/cmtt/m/n/12 ESI\T1/cmr/m/n/12 , che con-tie-ne la li
--sta col-le-ga-ta ap-pe-na crea-ta, al-l'in-ter-no
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 403--404
-
- []
-
-<./images/all_subkey_info_keeper.png, id=314, 1201.48875pt x 306.14375pt>
-File: ./images/all_subkey_info_keeper.png Graphic file (type png)
-<use ./images/all_subkey_info_keeper.png>
-Package pdftex.def Info: ./images/all_subkey_info_keeper.png  used on input lin
-e 408.
-(pdftex.def)             Requested size: 390.0pt x 99.37407pt.
-<./images/helper_retrieve_subkeys.png, id=315, 1198.4775pt x 162.6075pt>
-File: ./images/helper_retrieve_subkeys.png Graphic file (type png)
-<use ./images/helper_retrieve_subkeys.png>
-Package pdftex.def Info: ./images/helper_retrieve_subkeys.png  used on input li
-ne 411.
-(pdftex.def)             Requested size: 390.0pt x 52.9138pt.
-<./images/helper_retrieve_values.png, id=316, 1201.48875pt x 215.80624pt>
-File: ./images/helper_retrieve_values.png Graphic file (type png)
-<use ./images/helper_retrieve_values.png>
-Package pdftex.def Info: ./images/helper_retrieve_values.png  used on input lin
-e 414.
-(pdftex.def)             Requested size: 390.0pt x 70.05057pt.
-[23 <./images/all_subkey_info_keeper.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 418--420
-\T1/cmr/m/n/12 Questa fun-zio-ne, ter-mi-nan-do, re-sti-tui-sce il con-trol-lo 
-a
- []
-
-
-Underfull \hbox (badness 1342) in paragraph at lines 418--420
-[][]\T1/cmtt/m/n/12 FUN_004018a0_open_handle_to_reg_key[][] \T1/cmr/m/n/12 che,
- a que-sto pun-to, non fa
- []
-
-
-Underfull \hbox (badness 7851) in paragraph at lines 426--428
-\T1/cmr/m/n/12 Questa fun-zio-ne è l'ul-ti-ma in-vo-ca-ta dal [][]\T1/cmtt/m/n/
-12 main []\T1/cmr/m/n/12 che non è sta-
- []
-
-
-Underfull \hbox (badness 6364) in paragraph at lines 426--428
-\T1/cmr/m/n/12 ta an-co-ra ana-liz-za-ta. Pren-de in in-put il va-lo-re ri-tor-
-na-to da
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 426--428
-[][]\T1/cmtt/m/n/12 FUN_004018a0_open_handle_to_reg_key[][]\T1/cmr/m/n/12 , che
- è un pun-ta-to-re a
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 426--428
-
- []
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 429.
-[24 <./images/helper_retrieve_subkeys.png> <./images/helper_retrieve_values.png
->]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 429.
+[15 <./images/struct_appds_completa.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 299.
+ [16]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 299.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 429.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 429.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 299.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 299.
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: D3D32FF2D313402F504509B89D00B499;1872.
+(rerunfilecheck)             Checksum: 64A3853ABA1999AD6A43702220364917;2115.
  ) 
 Here is how much of TeX's memory you used:
- 7895 strings out of 494798
- 110068 string characters out of 6177668
- 306134 words of memory out of 5000000
- 10994 multiletter control sequences out of 15000+600000
+ 7837 strings out of 492982
+ 109137 string characters out of 6134896
+ 308655 words of memory out of 5000000
+ 11214 multiletter control sequences out of 15000+600000
  19451 words of font info for 56 fonts, out of 8000000 for 9000
- 81 hyphenation exceptions out of 8191
- 36i,8n,35p,1341b,458s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/luca/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600p
-k> </home/luca/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600p
-k> </home/luca/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600p
-k> </home/luca/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600p
-k> </home/luca/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600p
-k> </home/luca/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600p
-k> </home/luca/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600p
-k> </home/luca/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi2074.600p
-k></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on report.pdf (24 pages, 550386 bytes).
+ 1141 hyphenation exceptions out of 8191
+ 28i,8n,35p,1741b,457s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{FUN_00401ff0_show_error_message} has been referen
+ced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{FUN_00401b20_create_timer} has been referenced but 
+does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{WinMain} has been referenced but does not exist, re
+placed by a fixed one
+
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm
+-super/sfbi2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb>
+</usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fo
+nts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-
+super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb><
+/usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fon
+ts/type1/public/cm-super/sftt1200.pfb>
+Output written on report.pdf (16 pages, 461322 bytes).
 PDF statistics:
- 747 PDF objects out of 1000 (max. 8388607)
- 336 compressed objects within 4 object streams
- 98 named destinations out of 1000 (max. 500000)
- 258 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 323 PDF objects out of 1000 (max. 8388607)
+ 276 compressed objects within 3 object streams
+ 58 named destinations out of 1000 (max. 500000)
+ 265 words of extra memory for PDF output out of 10000 (max. 10000000)
 
