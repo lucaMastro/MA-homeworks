@@ -1,0 +1,347 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[T1]{fontenc}
+
+\usepackage{lipsum}
+\usepackage{pifont}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{spverbatim}
+\usepackage{float}
+\usepackage{url}
+\usepackage{xstring}
+
+\usepackage{hyperref}
+
+\usepackage{xcolor}
+\definecolor{linkcolor}{RGB}{1,1,87}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=linkcolor,
+    urlcolor=blue
+}
+\usepackage{fancyvrb,newverbs,xcolor}
+\definecolor{cverbbg}{gray}{0.93}
+
+\newcommand{\makesub}[1]{%
+  \saveexpandmode\noexpandarg
+  \StrSubstitute{#1}{\_}{_}[\temp]%
+  \restoreexpandmode%
+}
+
+\newcommand{\target}[1]{%
+  \makesub{#1}%
+  \hypertarget{\temp}{}%
+}
+
+\newcommand{\attach}[1]{%
+  \makesub{#1}%
+  \hyperlink{\temp}{\emph{#1}}%
+}
+\newcommand{\attachedCode}[1]{%
+  \makesub{#1}%
+  \hyperlink{\temp}{\code{#1}}%
+}
+
+\newcommand{\code}[1]{\colorbox{cverbbg}{\texttt{\StrSubstitute{#1}{_}{\_}}}}
+
+\newcommand*\xor{\oplus}
+\newcommand{\nota}[1]{\textbf{Nota}: #1}
+\newcommand{\memo}[1]{\textbf{Memo}: #1}
+\newcommand{\esempio}[1]{\textbf{Esempio}: #1}
+\newcommand{\tbs}{\textbackslash}
+\newcommand{\ghidra}{\emph{Ghidra}}
+\newcommand{\ollydb}{\emph{OllyDB}}
+\newcommand{\Null}{\code{NULL}}
+\newcommand{\dll}{\emph{DLL}}
+\newcommand{\api}{\emph{API}}
+\newcommand{\key}[1]{\texttt{#1}}
+
+
+\newenvironment{myverb}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{%
+    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
+  }
+  \endflushleft
+}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}\sloppy
+  
+\title{
+  \textbf{
+    \emph{Relazione homework 3}
+  }
+}  
+\author{Luca Mastrobattista\\ Matricola: 0292461}
+\date{}
+\maketitle
+
+\tableofcontents
+\newpage
+\section{Traccia dell'homework}
+\subsection{Testo}
+Analizzare con Ghidra e OllyDbg il programma eseguibile
+hw3.exe contenuto nell'archivio hw3.zip.
+Determinare il codice di sblocco che rende funzionale il
+programma e riassumere in un documento tutte le informazioni
+acquisite, la metodologia adottata ed i passi logici deduttivi
+utilizzati nel lavoro di analisi.
+\subsection{Scadenza}
+Due settimane dalla data di assegnazione del lavoro: 13/12/2021.
+\subsection{Consegna}
+Documento in formato PDF inviato come allegato ad
+un messaggio di posta elettronica all'indirizzo del docente
+("$<$cognome$>$@uniroma2.it"), con subject:
+"[AMW21] HW3: $<$matricola studente$>$"
+
+\newpage
+\section{Ambiente di lavoro}
+Il file eseguibile è stato caricato su Ghidra istallato su un sistema operativo Linux. \\
+L'ambiente controllato di utilizzo è un sistema operativo Windows 10 virtualizzato con il software \emph{VirtualBox}, in cui sono istallati gli strumenti di monitoraggio.
+
+
+\newpage
+\section{Metodologia}
+
+\subsection{Informazioni note a priori}
+Dalla traccia dell'\emph{homework} si deduce che l'eseguibile risulta \emph{bloccato} in qualche modo, e solo con un particolare codice si riesce a farlo funzionare correttamente.
+
+\subsection{Finalizzazione dell'obiettivo}
+L'analisi dell'applicazione ha come obiettivo quello di individuare il codice di sblocco.
+
+\subsection{Ottenimento del codice macchina}
+Codice macchina fornito dal professore.
+
+\subsection{Osservazione del funzionamento}
+
+
+
+\subsection{Disassemblaggio del codice macchina}
+Lo strumento che si è utilizzato è il software \emph{Ghidra}.
+
+\subsubsection{Riepilogo risultati dell'import}
+\begin{figure}[H]
+\centering\includegraphics[width=\textwidth]{import}
+\end{figure}
+
+
+\subsubsection{Informazioni aggiuntive}
+\begin{spverbatim}
+----- Loading /home/luca/Scrivania/MA/homeworks/homework-03/hw3.exe -----
+Delay imports detected...
+Searching for referenced library: USER32.DLL ...
+Unable to find external library: USER32.DLL
+Searching for referenced library: ADVAPI32.DLL ...
+Unable to find external library: ADVAPI32.DLL
+Searching for referenced library: KERNEL32.DLL ...
+Unable to find external library: KERNEL32.DLL
+Searching for referenced library: MSVCRT.DLL ...
+Unable to find external library: MSVCRT.DLL
+Searching for referenced library: GDI32.DLL ...
+Unable to find external library: GDI32.DLL
+Finished importing referenced libraries for: hw3.exe
+  [ADVAPI32.DLL] -> not found
+  [GDI32.DLL] -> not found
+  [KERNEL32.DLL] -> not found
+  [MSVCRT.DLL] -> not found
+  [USER32.DLL] -> not found
+\end{spverbatim}
+
+\newpage
+\section{Analisi}
+Con analisi statica di base si nota subito la presenza della sezione \textit{.tls}: sono infatti presenti due \textit{tls\_callback}, ma dalla loro analisi statica avanzata non risultano presenti meccanismi di antidebugging al loro interno. Ricercando le funzioni presenti, invece, è presente la funzione \code{IsDebuggerPresent} che viene invocata in \attachedCode{FUN_004024a0_isDebuggerPresent}. Il controllo che viene fatto sembra facilmente superabile, quindi si prova a passare subito all'analisi dinamica avanzata: si mette un breakpoint all'indirizzo \textit{4024a3}, indirizzo dell'invocazione dell'\api{}, e si esegue uno \textit{step-over}. Nel registro \code{EAX} viene restituito il valore 1, ma questo viene modificato impostandolo a 0 prima di eseguire la successiva \code{TEST EAX, EAX}. Si procede dunque a creare una \textit{patch} che modifichi questa \code{CALL} in un \code{XOR EAX, EAX}, in modo che il successivo controllo venga sempre superato. Caricando il nuovo eseguibile e provando a lanciarlo, l'applicazione continua l'esecuzione ma non viene mostrata la finestra dell'eseguibile, pur invocando l'\api{} \code{ShowWindow}: sembra bloccato in un ciclo. Si procede ad analizzare su \ghidra{} la funzione \attachedCode{FUN_00401de0_window_procedure}. Qui, la prima invocazione interessante è \code{FUN_00401dc0_check_debugger_FS[30]}: riceve come parametro l'indirizzo del messaggio \key{uMsg} che la \key{window\_procedure} si prepara a gestire e ne si modifica il valore incrementandolo di una quantità pari al valore contenuto all'offset 2 di \code{FS:[30h]}. In questa zona di memoria, è memorizzato il valore 1 se il processo corrente è eseguito sotto un debugger, 0 altrimenti. In questo modo, se si è sotto debugger il valore del messaggio viene incrementato di 1 e il normale flusso della gestione dei messaggi viene alterata: si sta interferendo con il normale funzionamento dell'applicazione. Si prova quindi ad eseguire una patch, sostituendo l'invocazione a questa funzione con una istruzione di \code{NOP}. Il nuovo eseguibile sembra creare la finestra, ma soltanto il suo scheletro: non c'è nessuna casella di testo e, pochi instanti dopo, \ollydb{} viene chiuso; sembra il classico funzionamento di \code{OutputDebugString}.
+\begin{figure}[H]
+\centering \includegraphics[width=\textwidth]{before_crash}
+\end{figure}
+ Torniamo ad analisi statica avanzata e cerchiamo su \ghidra{} dei riferimenti a questa \api{}, senza successo. Si nota però che viene importata l'\api{} \code{LoadLibrary}, ma nessun riferimento viene trovato. Allora, sempre su \ghidra{}, si analizza più accuratamente la funzione \code{FUN_004024e0_win_main}. Viene invocata la funzione \code{FUN_00401560_create_and_load_file_mapping} ma, più interessante in questo momento, la funzione \code{FUN_00401830_init_appds}. Qui, infatti, oltre ai classici campi base della struttura \code{struct_appds}, viene inizializzato un ulteriore campo al valore restituito da \code{FUN_004016f0_retrieve_OutputDebugStringAddress}. In questa funzione sono presenti dei meccanismi di anti-disassemblaggio e va quindi analizzata con attenzione. Si può trovare un'aiuto anche nell'esecuzione di questo blocco con \ollydb{}, poiché sappiamo che è in grado di arrivare fino a questo punto. Quindi, procedendo in parallelo con \ghidra{} e \ollydb{}, si riesce a disassemblare correttamente questa funzione, e si nota come venga invocata proprio qui la \code{LoadLibrary} e la \code{GetProcAddress}. L'indirizzo di questa funzione viene salvato nel campo della \code{struct_appds} denominato \code{outputDebugStringA_address}. Tuttavia, non siamo in grado di trovare su \ghidra{} delle referenze a questo campo. Sappiamo però che la finestra viene creata e, probabilmente, i problemi sorgono quando si va a \textit{disegnare} le varie caselle di testo. Nel blocco di gestione di \code{WM_SIZE}, infatti, c'è una funzione non ancora analizzata che \ollydb{} riesce a raggiungere: \code{FUN_00404000_invoke_outputDebugString}. In questa funzione si accede all'area di memoria all'indirizzo \code{00405020} e si \textit{decodificano} i byte presenti. La decodifica avviene con le seguenti istruzioni:
+ \begin{myverb}
+XOR EDX, EDX
+MOV EAX, dword ptr [EDX +0x4 + 00405020]
+XOR EAX, 0x89a3fa2b
+ROR EAX, 0x9
+MOV dword ptr [EDX*0x4 + 00405020], EAX
+ADD EDX, 0x1
+\end{myverb}
+Il codice decodificato è il seguente:
+\begin{figure}[H]
+\centering \includegraphics[width=\textwidth]{istructions_at_00405020}
+\end{figure}
+Questo set di istruzioni genera sullo stack una stringa composta da 16 \code{"\%s"}, e invoca la funzione \code{OutputDebugString} memorizzata nell'opportuno campo della struttura \code{struct_appds}. \\
+Applichiamo una nuova patch all'eseguibile, sostituendo l'invocazione di questa funzione con una istruzione di \code{NOP}. Con questa patch \ollydb{} non crasha, ma i meccanismi di anti-debugging non sono finiti: viene mostrata una finestra di errore.
+\begin{figure}[H]
+\centering \includegraphics[width=\textwidth]{debug_patch_error}
+\end{figure}
+A questo punto, però, vediamo che le \textit{edit text} e il \textit{bottone} sono stati creati correttamente: questo significa che il blocco di gestione \code{WM_CREATE} viene eseguito almeno fino alla creazione di questi elementi. Mettendo un breakpoint all'indirizzo \key{0040248c}, vediamo che la funzione che fa comparire il messaggio di errore è \code{FUN_00401b30_set_timer}. Qui, però, viene solo inizializzato il timer, quindi l'errore deve essere all'interno della funzione che \code{SetTimer} riceve come quarto parametro per specificare il comportamento del timer ogni volta che passa il tempo specificato come terzo parametro. Si tratta della funzione \code{FUN_004019a0_tick_update_timer}. Questa funzione, prima di terminare, controlla il valore del campo \code{elapsed_seconds} della nostra struttura dati \code{struct_appds} e viene messo in \code{AND} con il valore 7 e se il risultato è 0 viene invocata una nuova funzione prima di terminare. Il valore nella struttura dati è inizialmente 0, quindi il risultato sarà sempre 0: seguiamo quindi la funzione \code{FUN_004042a0_show_patched_error}. L'analisi di questa funzione non è stata approfondita, ma qui viene effettivamente invocata la \code{MessageBoxA} con stringhe che hanno il formato di quelle mostrate dall'applicazione. Potrebbe valere la pena provare a patchare l'invocazione della funzione per vedere se il problema viene effettivamente risolto. Viene quindi sostituita la \code{CALL} all'indirizzo \textit{00401a21} con una istruzione \code{NOP}. \\
+La patch, insieme a tutte le altre, sblocca l'esecuzione dell'applicazione con \ollydb{}. Si procede quindi mettendo un breakpoint sulla prima istruzione della funzione che viene invocata al termine del timer: questa funzione è salvata nel campo \code{function_pointer} della struttura \code{struct_appds} che viene inizializzato nella funzione \code{FUN_00401830_init_appds}: si tratta della funzione \code{FUN_004040e0_timer_proc_end}. Anche qui sono presenti molti meccanismi anti-disassemblaggio, quindi è conveniente procedere in parallelo con \ollydb{} e \ghidra{}. All'indirizzo \textit{004041f7} c'è l'invocazione dell'\api{} \code{GetDlgItemTextA}, a cui viene passato l'identificativo della \textit{edit text} che contiene il codice come parametro \emph{nIDDlgItem}: si sta recuperando il codice inserito. Il buffer specificato è il registro \code{ESI}, mentre il numero dei bytes letti verrà inserito in \code{EAX}. Il codice continua poi effettuando la stessa operazione di decodifica vista nel caso di \code{FUN_00404000_invoke_outputDebugString}:
+\begin{myverb}
+XOR ECX, ECX
+label:
+MOV EDX, dword ptr [ECX*0x4 + 004050c0]
+XOR EDX, 0x89a3fa2b
+ROR EDX, 0x9
+MOV dword ptr [ECX*0x4 + 004050c0], EDX
+ADD ECX, 0x1
+CMP ECX, 0x34
+JNZ label
+\end{myverb}
+Dopo averlo codificato, si passa ad eseguirlo. Qui vengono fatti dei controlli in modo sequenziale: prima si controlla la lunghezza della stringa inserita dall'utente e si continua solo se questa è uguale a 9. In seguito, i controlli vengono fatti un byte alla volta terminando al primo controllo errato. Tuttavia, questi 9 controlli non sono fatti \textit{in chiaro}: ogni carattere del codice dell'utente viene messo in \code{XOR} con uno specifico byte e si controlla che il risultato dell'operazione sia uguale a un certo risultato atteso. In particolare, la lista dei byte con cui il codice dell'utente è messo in \code{XOR} è:
+\begin{myverb}
+{ 0x3f, 0x28, 0x2f, 0xa5, 0x5d 0x47, 0x3d, 0x4f, 0x3f }
+\end{myverb}
+Chiamiamo questi byte $k_i$ $\forall i \in [0..9]$.\\
+La lista degli output attesi è:
+\begin{myverb}
+{ 0x0c, 0x5a, 0x61, 0xc0, 0x2e 0x13, 0x0d, 0x70, 0x1e }
+\end{myverb}
+Chiamiamo questi byte $y_i$ $\forall i \in [0..9]$.\\
+Queste informazioni bastano a recuperare la password: per le proprietà dello \code{XOR}, infatti, si ha che: 
+\[
+y_i = x_i \xor k_i \rightarrow y_i \xor k_i = x_i \xor k_i \xor k_i = x_i \xor 0 = x_i
+\]
+\begin{minipage}{0.4\textwidth}
+\begin{figure}[H]
+\centering \includegraphics[width=\textwidth]{expected_xor_schema}
+\end{figure}
+\textit{Schema con cui funziona l'applicazione.}
+\end{minipage}\hfill	
+\begin{minipage}{0.4\textwidth}
+\begin{figure}[H]
+\centering \includegraphics[width=\textwidth]{xor_property}
+\end{figure}
+\textit{Invertendo la direzione, si può risalire alla password che sblocca l'applicazione.}
+\end{minipage}
+
+Provando ad avviare l'applicazione con \ollydb{}, questo funziona male e non si riesce a debuggare il codice. Sono sicuramente presenti meccanismi di antidebugging. Andiamo su \ghidra{} e cerchiamo il \emph{Message loop}. Questo si trova nella funzione \code{FUN_004024e0_message_loop}. Il debugger riesce ad arrivare fino a questo punto. Si procede dunque con analisi dinamica, riportando le informazioni ottenute anche su \ghidra{}. La prima invocazione interessante è nella funzione \code{FUN_00401830_set_timer_proc_and_get_outputDebugStringAddress}. Questa è la funzione che imposta la \emph{timer procedure} da invocare quando il countdown termina. Dopo aver impostato il puntatore a funzione \code{PTR_00407034_timer_procedure_pointer}, viene invocata la funzione \attachedCode{FUN_004016f0_retrieve_OutputDebugStringAddress}. Questa funzione restituisce in \code{EAX} l'indirizzo della funzione \code{OutputDebugStringA} e viene memorizzato nella variabile globale \code{PTR_004070ec_outputDebugStringA_address}. La funzione in seguito ritorna l'indirizzo della struttura dati inizializzata.\\
+Il codice continua invocando la \code{CreateWindowExA} e, successivamente, la funzione \code{FUN_004024a0_isDebuggerPresent}, in cui si invoca \code{IsDebuggerPresent()} che ritorna un valore diverso da 0 se l'applicazione esegue sotto il contesto di un debugger. \ollydb{} termina esattamente in questo punto: si procede quindi con una patch, in modo da sostituire l'invocazione di \code{isDebuggerPresent} con un \code{XOR EAX, EAX}. La patch però genera un errore quando si prova a lanciare l'eseguibile:
+\begin{figure}[H]
+\centering\includegraphics[width=\textwidth]{patch_error}
+\end{figure}
+
+L'applicazione termina se viene determinato un debbugger. Azzerando in \ollydb{} il valore di \code{EAX} prima che questo venga controllato, il controllo viene superato e si può procedere con l'analisi dinamica. Il codice continua col classico \emph{message loop}. \\
+Tuttavia, la finestra dell'eseguibile non viene mostrata e allora si prova a proseguire con l'analisi dinamica continuando su un'altra strada: si avvia l'eseguibile e si esegue l'\emph{attach} del debugger solo quando questo è già avviato. Tuttavia, il debugger si comporta come se avesse ricevuto un'invocazione di \code{OutputDebugStringA}. Allora si procede a controllare la funzione che viene invocata ogni volta che il timer decrementa di un secondo.\\
+
+Nel \code{WinMain} si invoca subito la funzione \attachedCode{FUN_00401560_create_and_load_file_mapping}, poi si procede inizializzando la struttura di tipo \code{WNDCLASSEXA}, impostando come \textit{window procedure} la funzione \attachedCode{FUN_00401de0_window_procedure}. Dopodiché procede con l'invocazione di \attachedCode{FUN_00401830_init_appds}, che prende come parametro \attachedCode{FUN_004040e0_timer_proc_end}. Si invoca \code{CreateWindowExA} e successivamente \attachedCode{FUN_004024a0_isDebuggerPresent}.
+
+\target{FUN_00401830_init_appds}
+\subsection{FUN\_00401830\_init\_appds}
+Qui si inizializzano dei campi della struttura \code{struct_appds} nel modo già visto nei precedenti \textit{homeworks}. In più, c'è l'invocazione di \attachedCode{FUN_004016f0_retrieve_OutputDebugStringAddress}, che restituisce l'indirizzo della funzione \code{OutputDebugStringA} all'interno della libreria \code{KERNEL32.DLL}. Questo valore viene memorizzato in un apposito campo della struttura dati \code{struct_appds}.
+
+\target{FUN_004016f0_retrieve_OutputDebugStringAddress}
+\subsection{FUN\_004016f0\_\\retrieve\_OutputDebugStringAddress}
+Seguendo questa funzione con \ghidra{}, troviamo qui un meccanismo di \emph{anti disassemblaggio}: si tratta della sequenza di bytes \code{eb ff c0 48}, variante del \emph{disassemblaggio impossibile}. In questa funzione, c'è l'invocazione alla libreria \code{LoadLibraryA} con parametro la stringa \code{"kernel32.dll"}. Successivamente, seguendo il flusso con \ollydb{}, viene invocata \code{GetProcAddress}, che restituisce l'indirizzo di \code{OutputDebugStringA}. L'indirizzo di questa funzione viene restituito in \code{EAX}. 
+
+\target{FUN_00401560_create_and_load_file_mapping}
+\subsection{FUN\_00401560\_create\_and\_load\_file\_mapping}
+In questa funzione per prima cosa ci si prepara all'invocazione di \code{GetModuleFileName}, passando come \emph{handle} il valore \Null{}: verrà restituito il path dell'eseguibile. Una volta recuperato il path dell'eseguibile, questo viene usato come primo parametro di \code{CreateFileA}. Questa funzione prende in input:
+\begin{itemize}
+\item \code{LPCSTR lpFileName}, nome del file da creare o aprire: riceve il path dell'esegibile;
+\item \code{DWORD dwDesiredAccess}, i permessi di apertura del file: riceve \code{GENERIC_READ};
+\item \code{DWORD dwShareMode}, la modalità di condivisione richiesta; riceve \code{FILE_SHARE_READ}: permette successive richieste di \code{open} sul file che richiedono permessi di lettura;
+\item \code{LPSECURITY_ATTRIBUTES lpSecurityAttributes}, puntatore a struttura \code{SECURITY_ATTRIBUTES}, riceve \Null{};
+\item \code{DWORD dwCreationDisposition}, che specifica le azioni da compiere su un file esistente o meno. Riceve \code{OPEN_EXISTING}: apre il file solo se esiste;
+\item \code{DWORD dwFlagsAndAttributes}, attributi e \emph{flags} per il file. Riceve \code{FILE_FLAG_SEQUENTIAL_SCAN|FILE_ATTRIBUTE_NORMAL}. Dalla documentazione si legge che \code{FILE_ATTRIBUTE_NORMAL} è valido solo se usato da solo, quindi può essere ignorato. \code{FILE_FLAG_SEQUENTIAL_SCAN} specifica che il file verrà letto sequenzialmente dall'inizio alla fine;
+\item \code{HANDLE hTemplateFile}, un riferimento valido a un \emph{template file} con diritti di accesso \code{GENERIC_READ}. Riceve \Null{}.
+\end{itemize}
+Ci si sta preparando alla lettura del file eseguibile: se il valore restituito è diverso da \code{-1}, viene invocata \code{GetFileInformationByHandle}. Questa funzione riceve i seguenti parametri:
+\begin{itemize}
+\item \code{HANDLE hFile}, l'\emph{handle} a un file che contiene le informazioni da recuperare. Riceve l'\emph{handle} ottenuta precedentemente;
+\item \code{LPBY_HANDLE_FILE_INFORMATION lpFileInformation}, un puntatore a una struttura \code{BY_HANDLE_FILE_INFORMATION} che riceve le informazioni del file.
+\end{itemize}
+Si controlla se il valore di ritorno è uguale a 0, che significa che c'è stato un errore, o se il campo \code{nFileHigh} è diverso da 0. Se una delle due condizioni è vera, la funzione ritorna dopo aver chiuso l'\emph{handle} al file. \\ 
+Nell'esecuzione, queste due condizioni sono false e il codice continua salvando il campo \code{nFileSizeLow} in una variabile globale. In seguito, viene invocata la funzione \code{CreateFileMappingA}, che prende i seguenti parametri:
+\begin{itemize}
+\item \code{HANDLE hFile}, \emph{handle} al file da cui creare un \textit{mapping object}. Riceve l'\textit{handle} al file ottenuta dall'invocazione di \code{CreateFileA};
+\item \code{LPSECURITY_ATTRIBUTES lpFileMappingAttributes}, puntatore a struttura \code{SECURITY_ATTRIBUTES}. Riceve \Null{};
+\item \code{DWORD flProtect}, specifica la protezione della pagina del \textit{mapping object}. Riceve \code{PAGE_READ_ONLY | SEC_IMAGE}: il primo consente di mappare le viste per l'accesso di sola lettura, \textit{copy-on-write} o di esecuzione; l'altro, invece, specifica che il l'\textit{handle} passata come primo parametro è verso un file eseguibile;
+\item \code{DWORD dwMaximumSizeHigh}, \textit{high-order DWORD} della taglia massima del \textit{mapping object}. Riceve 0; 
+\item \code{DWORD dwMaximumSizeLow}, \textit{low-order DWORD} della taglia massima del \textit{mapping object}. Riceve 0;
+\begin{itemize}
+	\item[] \nota{poiché questo ultimi 2 parametri sono entrambi 0, la taglia massima del \textit{file mapping object} sarà uguale alla taglia attuale del file identificato dall'\textit{handle} passata come primo parametro}
+\end{itemize}
+\item \code{LPCSTR lpName}, il nome del \textit{file mapping object}; Riceve \Null{}: il \textit{file mapping object} viene creato senza un nome.
+\end{itemize}
+Se questa funzione fallisce ritorna \Null{} e, in questo caso, il codice invoca \code{MapViewOfFile}: questa funzione ha l'obiettivo di di \textit{mappare} una vista di un \textit{file mapping object} nell'address space del processo chiamante. Riceve i seguenti parametri: 
+\begin{itemize}
+\item \code{HANDLE hFileMappingObject}, \textit{handle} a un \textit{file mapping object}. È il valore ottenuto da \code{CreateFileMapping};
+\item \code{DWORD dwDesiredAccess}, il tipo di accesso desiderato al \textit{file mapping object}. Riceve \code{FILE_MAP_READ}: specifica una vista \textit{read-only} per il file mappato;
+\item \code{DWORD dwFileOffsetHigh}, \textit{high-order DWORD} della taglia massima del mapping object. Riceve 0;
+\item \code{DWORD dwFileOffsetLow}, \textit{low-order DWORD}della taglia massima del mapping object. Riceve 0;
+\begin{itemize}
+	\item[] \nota{la combinazione di questi due parametri serve a specificare un offset all'interno del \textit{file mapping}.}
+\end{itemize}
+\item \code{SIZE_T dwNumberOfBytesToMap}, il numero di byte di un \textit{file mapping object} da mappare per la vista. Riceve 0: in questo caso la vista creata si estende dall'offset specificato coi due parametri precedenti fino alla fine dell'\textit{file mapping}.
+\end{itemize} 
+In caso di successo, la funzione restituisce l'indirizzo iniziale della vista \textit{mappata}.
+
+\target{FUN_00401dc0_check_debugger_FS[30]}
+\subsection{FUN\_00401dc0\_check\_debugger\_FS[30]}
+Questa funzione riceve in input il puntatore al messaggio ricevuto dalla \attachedCode{window_procedure}. L'obiettivo di questa funzione è ostacolare il comportamento del debug, incrementando il valore di questo messaggio con il valore contenuto al byte 2 di \code{FS[30h]}, campo che specifica se il processo è debuggato o meno. Come risultato, se non c'è un debug attivo il valore del messaggio rimane invariato, altrimenti viene incrementato di 1.
+
+
+\target{FUN_004016b0_compute_checksum}
+\subsection{FUN\_004016b0\_compute\_checksum}
+In questa funzione si accede ai nuovi campi della struttura e probabilmente vengono fatti controlli di consistenza col file mapping object. Si recupera il campo \code{starting_file_view_address}, che contiene l'indirizzo \code{00140000}, e si controlla che non sia 0. Andando in questo indirizzo in \ollydb{}, si vede che ci sono gli stessi byte del file eseguibile aperto con un editor esadecimale (nel mio caso: \textit{okteta}). Da questo indirizzo, si accede all'offset \code{0x400}: c'è un'area di memoria non inizializzata: tutti i bytes sono 0. In seguito si annulla \code{ECX} con uno \code{XOR}, e si calcola uno shift a destra di 2 posizioni del registro \code{EAX} che conteneva la size del file: si sta dividendo per 4; \code{EAX} contiene ora \code{0x1480}. A questo valore viene sottratto \code{0x100}, ottenendo quindi \code{0x1380}: in \code{EAX} è memorizzata la dimensione rimanente del file in \code{DWORD}: si sono esclusi le 256 \code{dword} contenute nei 1024 bytes dell'offset iniziale. Si esegue uno \code{XOR} tra \code{ECX}, precedentemente annullato, e i 4 byte di memoria puntati da \code{EDX}, che contiene inizialmente l'offset \code{400h} del \textit{file mapping object} e che viene incrementato di 4 bytes ad ogni iterazione.
+\begin{figure}[H]
+\centering\includegraphics[width=\textwidth]{checksum_calculation}
+\end{figure}
+
+\section{Note}
+\begin{itemize}
+\item c'è una sezione tls: è probabile che i tls callback vengano invocati prima di eseguire il codice. Debuggando l'eseguibile con \ollydb{}2, possiamo fermarci all'invocazione di un callback. Questo succede invocando il \code{tls_callback_0}. Subito dopo, accade qualcosa di interessante:
+\begin{myverb}
+MOV ECX, dword ptr [EBP-0x10]
+MOV dword ptr FS:[0], ECX
+\end{myverb}
+In \code{ECX} c'è l'indirizzo \code{0060F9F4}: si sta rimpiazzando l'inizio della catena dei gestori delle eccezioni. Si nota infatti che l'indirizzo è presente nello stack.
+
+\item Patch da fare:
+\begin{itemize}
+	\item nella funzione nella funzione \code{FUN_004024a0_isDebuggerPresent}: cambiare la \code{CALL} all'indirizzo \textit{0x004024a3} con \code{XOR EAX, EAX}
+
+	\item nella funzione \code{FUN_00401de0_window_procedure}, sostiture la \code{CALL FUN_00401dc0_check_debugger_FS[30]} all'indirizzo \textit{401e1a} con una serie di \code{NOP} 
+	\item nella funzione \code{FUN_004016b0_compute_checksum}, sostituire il codice con:
+	\begin{myverb}
+	MOV ECX, 0xFE103C58
+	MOV dword ptr [004070e0], ECX
+	RET
+	\end{myverb}
+Dopo aver applicato queste patch, il programma sembra mostrare la finestra, ma poi crasha. Ciò che accade è che viene invocata di nuovo la \attachedCode{window_procedure} con \code{uMsg = WM_SIZE}. al termine di questo blocco, viene invocata la funzione \code{FUN_00404000}. In questa funzione per prima cosa si accede a ull'area di memoria all'indirizzo \code{00405020}, e si modificano i byte lì presenti (4 alla volta) nel seguente modo:
+\begin{myverb}
+XOR EDX, EDX
+MOV EAX, dword ptr [EDX +0x4 + 00405020]
+XOR EAX, 0x89a3fa2b
+ROR EAX, 0x9
+MOV dword ptr [EDX*0x4 + 00405020], EAX
+ADD EDX, 0x1
+\end{myverb}
+\begin{figure}[H]
+\centering \includegraphics[width=\textwidth]{istructions_at_00405020}
+\end{figure}
+\end{itemize}
+Il codice è stato inserito su \ghidra{}. \\
+Queste istruzioni generano una stringa composta da 16 \code{"\%s"}, e invoca la funzione \code{OutputDebugString} memorizzata nell'opportuno campo della struttura \code{struct_appds}.
+
+\item l'eseguibile crasha se messo in background
+
+\item nella funzione timer\_proc\_end, esegue lo stesso meccanismo dell'outputdebugsring sui bute all'offset 004050c0. Dopo averli decodificati, questi byte vengono invocati.
+\end{itemize}
+
+
+\newpage
+\target{Verifica}
+\section{Verifica}
+
+
+\end{document}

@@ -1,0 +1,8 @@
+1. hw3.exe: original file
+2. hw3-okular.exe: file with decoded bytes read from ollydb
+3. hw3-p1.exe: removed IsDebuggerPresent control
+4. hw3-p2.exe: removed FS:[30h] control too
+5. hw3-p3.exe: removed OutputDebugString invocation too
+6. hw3-p4.exe: set the correct checksum
+7. hw3-p4-var.exe: not set the correct checksum but deleted the control in
+   updateTickTime

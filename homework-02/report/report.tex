@@ -120,6 +120,8 @@ L'applicazione, una volta avviata, crea una finestra con un \emph{countdown} imp
 \centering\includegraphics[scale=0.4]{lauch_of_program}
 \end{figure}
 Al termine del \emph{countdown}, se il codice inserito non è corretto, compare una finestra di avviso di codice errato:
+
+\target{dialogo}
 \begin{figure}[H]
 \centering\includegraphics[scale=0.4]{error_code_ad}
 \end{figure}
@@ -231,7 +233,7 @@ Una volta disassemblato e riparato il codice, si può analizzare la funzione inv
 
 \target{FUN_00403000_check_on_exit}
 \paragraph{FUN\_00403000\_check\_on\_exit}
-Questa funzione viene invocata passandogli come input la struttura dati \code{struct_appds_00406010}. Inizializza il campo \code{init_0_bis} a 0 e poi invoca la funzione \code{GetDlgItemTextA}. I parametri passati a questa funzione sono:
+Questa funzione viene invocata passandole come input la struttura dati \code{struct_appds_00406010}. Inizializza il campo \code{init_0_bis} a 0 e poi invoca la funzione \code{GetDlgItemTextA}. I parametri passati a questa funzione sono:
 \begin{itemize}
 \item il campo \code{hWin} della struttura dati, che memorizza l'\emph{handle} alla finestra;
 \item il valore 5: questo rappresenta l'identificativo del \emph{control} da cui recuperare il testo. È l'identificativo della casella di testo che riceve il codice;
@@ -250,6 +252,18 @@ Se queste invocazioni non falliscono, viene finalmente invocata \code{ExitWindow
 Si può quindi concludere l'analisi affermando che il codice che permette lo \emph{shutdown} è \textbf{3RnESt0!?}. \\
 
 L'obiettivo dell'analisi è stato raggiunto in questo punto, e si potrebbe saltare alla fase di \attach{Verifica}; tuttavia non è stato ancora individuato il ruolo del campo \code{init_0_bis} della struttura dati e perciò, anche se non richiesto, viene riportato in seguito l'analisi delle funzioni che porta all'apprendimento del suo ruolo.
+
+\target{FUN_00401ff0_show_error_message}
+\paragraph{FUN\_00401ff0\_show\_error\_message}
+Questa funzione invoca semplicemente una \code{MessageBoxA} per mostrare un dialogo con i seguenti parametri:
+\begin{itemize}
+\item \code{NULL}: l'handler all'\emph{owner window}. Avendo specificato \code{NULL}, la \emph{message box} non avrà una \emph{owner window};
+\item la stringa \code{"Shutdown time has come!\tbs{}n\tbs{}nHowever, the unlock code is wrong.\tbs{}n\tbs{}nIf you want the full version of this wonderful tool,\tbs{}nyou can get the unlock code for just ten bucks!\tbs{}n\tbs{}nAsk to the nearest teacher around you!"}: rappresenta il messaggio da mostrare;
+\item la stringa \code{"Sorry, try again!"}: rappresenta il titolo del dialogo creato;
+\item il valore 16, che rappresenta \code{MB_ICONSTOP}: viene mostrata una icona col simbolo \emph{stop-sign}
+\end{itemize}
+La funzione termina invocando \code{PostQuitMessage}.\\
+È effettivamente il \attach{dialogo} mostrato quando il codice è errato.
 
 
 

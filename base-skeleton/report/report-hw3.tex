@@ -1,0 +1,139 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[T1]{fontenc}
+
+\usepackage{lipsum}
+\usepackage{pifont}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{spverbatim}
+\usepackage{float}
+\usepackage{url}
+\usepackage{xstring}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\definecolor{linkcolor}{RGB}{1,1,87}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=linkcolor,
+    urlcolor=blue
+}
+\usepackage{fancyvrb,newverbs,xcolor}
+\definecolor{cverbbg}{gray}{0.93}
+
+\newcommand{\makesub}[1]{%
+  \saveexpandmode\noexpandarg
+  \StrSubstitute{#1}{\_}{_}[\temp]%
+  \restoreexpandmode%
+}
+
+\newcommand{\target}[1]{%
+  \makesub{#1}%
+  \hypertarget{\temp}{}%
+}
+
+\newcommand{\attach}[1]{%
+  \makesub{#1}%
+  \hyperlink{\temp}{\emph{#1}}%
+}
+\newcommand{\codeattach}[1]{%
+  \makesub{#1}%
+  \hyperlink{\temp}{\code{#1}}%
+}
+
+\newcommand{\code}[1]{\colorbox{cverbbg}{\texttt{\StrSubstitute{#1}{_}{\_}}}}
+
+
+\newcommand{\nota}[1]{\textbf{Nota}: #1}
+\newcommand{\memo}[1]{\textbf{Memo}: #1}
+\newcommand{\esempio}[1]{\textbf{Esempio}: #1}
+\newcommand{\tbs}{\textbackslash}
+\newcommand{\ghidra}{\emph{Ghidra}}
+\newcommand{\ollydb}{\emph{OllyDB}}
+\newcommand{\Null}{\code{NULL}}
+\newcommand{\dll}{\emph{DLL}}
+\newcommand{\api}{\emph{API}}
+\newcommand{\key}[1]{\texttt{#1}}
+
+\newenvironment{myverb}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{%
+    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
+  }
+  \endflushleft
+}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}\sloppy
+  
+\title{
+  \textbf{
+    \emph{Relazione homework 3}
+  }
+}  
+\author{Luca Mastrobattista\\ Matricola: 0292461}
+\date{}
+\maketitle
+
+\tableofcontents
+\newpage
+\section{Traccia dell'homework}
+\subsection{Testo}
+
+\subsection{Scadenza}
+Due settimane dalla data di assegnazione del lavoro: 
+\subsection{Consegna}
+Documento in formato PDF inviato come allegato ad
+un messaggio di posta elettronica all'indirizzo del docente
+("$<$cognome$>$@uniroma2.it"), con subject:
+"[AMW21] HW3: $<$matricola studente$>$"
+
+\newpage
+\section{Ambiente di lavoro}
+Il file eseguibile è stato caricato su Ghidra istallato su un sistema operativo Linux. \\
+L'ambiente controllato di utilizzo è un sistema operativo Windows 10 virtualizzato con il software \emph{VirtualBox}, in cui sono istallati gli strumenti di monitoraggio.
+
+
+\newpage
+\section{Metodologia}
+
+\subsection{Informazioni note a priori}
+
+
+\subsection{Finalizzazione dell'obiettivo}
+
+\subsection{Ottenimento del codice macchina}
+Codice macchina fornito dal professore.
+
+\subsection{Osservazione del funzionamento}
+
+
+\subsection{Disassemblaggio del codice macchina}
+Lo strumento che si è utilizzato è il software \emph{Ghidra}.
+
+\subsubsection{Riepilogo risultati dell'import}
+
+\subsubsection{Informazioni aggiuntive}
+\begin{spverbatim}
+
+\end{spverbatim}
+
+\newpage
+\section{Analisi}
+
+\newpage
+\target{Verifica}
+\section{Verifica}
+
+
+\end{document}
