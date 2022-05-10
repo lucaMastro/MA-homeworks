@@ -1,0 +1,272 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage[T1]{fontenc}
+
+\usepackage{lipsum}
+\usepackage{pifont}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{spverbatim}
+\usepackage{float}
+\usepackage{url}
+\usepackage{xstring}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\definecolor{linkcolor}{RGB}{1,1,87}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=linkcolor,
+    urlcolor=blue
+}
+\usepackage{fancyvrb,newverbs,xcolor}
+\definecolor{cverbbg}{gray}{0.93}
+
+\newcommand{\makesub}[1]{%
+  \saveexpandmode\noexpandarg
+  \StrSubstitute{#1}{\_}{_}[\temp]%
+  \restoreexpandmode%
+}
+
+\newcommand{\target}[1]{%
+  \makesub{#1}%
+  \hypertarget{\temp}{}%
+}
+
+\newcommand{\attach}[1]{%
+  \makesub{#1}%
+  \hyperlink{\temp}{\emph{#1}}%
+}
+\newcommand{\attachcode}[1]{%
+  \makesub{#1}%
+  \hyperlink{\temp}{\code{#1}}%
+}
+
+\newcommand{\code}[1]{\colorbox{cverbbg}{\texttt{\StrSubstitute{#1}{_}{\_}}}}
+
+\newcommand{\linux}{\textit{Linux}}
+\newcommand{\win}{\textit{Windows}}
+\newcommand{\nota}[1]{\textbf{Nota}: #1}
+\newcommand{\memo}[1]{\textbf{Memo}: #1}
+\newcommand{\esempio}[1]{\textbf{Esempio}: #1}
+\newcommand{\tbs}{\textbackslash}
+\newcommand{\ghidra}{\emph{Ghidra}}
+\newcommand{\ollydb}{\emph{OllyDB}}
+\newcommand{\Null}{\code{NULL}}
+\newcommand{\dll}{\emph{DLL}}
+\newcommand{\api}{\emph{API}}
+\newcommand{\key}[1]{\texttt{\StrSubstitute{#1}{_}{\_}}}
+
+\newenvironment{myverb}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{%
+    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
+  }
+  \endflushleft
+}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}\sloppy
+\noindent
+PUSH EBP\\
+MOV EBP, ESP\\
+MOV EAX, dword ptr [EBP+ param1]\\
+MOV ECX, dword ptr [EBP+ param2]\\
+SUB ESP, 0x2C\\
+PUSH EBX\\
+PUSH ESI\\
+PUSH EDI\\
+LEA EDI, [EAX + ECX*0x1]\\
+LEA EDX, [EDI - +0x18] $\rightarrow$ 488fe8\\
+
+	\target{LAB\_4779f6}
+	LAB\_004779f6:\\
+CMP EAX, EDX $\rightarrow$ eax = 400000, edx = 4088fe8, c-flag = 1\\
+JC \attach{LAB\_004773d0}\\
+	
+	\target{LAB\_00477a0a}
+	LAB\_00477a0a:\\
+XOR EAX, EAX\\
+	
+	\target{LAB\_004774f8}
+	LAB\_004774f8:\\
+POP EDI\\
+POP ESI\\
+POP EBX\\
+LEAVE\\
+RET\\
+	
+	\target{LAB\_004773d0}
+	LAB\_004773d0:\\
+MOV ECX, dword ptr [EAX]\\
+TEST ECX, ECX\\
+JZ \attach{LAB\_004776c3}\\
+MOV ESI, ECX \\
+XOR ESI, 0x88bbdd8d $\rightarrow$ 882b87c0\\
+CMP dword ptr [EAX+ 0x4], ESI $\rightarrow$ [400004] = 00000003\\
+JNZ \attach{LAB\_004776c3}\\
+XOR ECX, 0xddbca2b2\\
+CMP dword ptr [EAX+ 0x8], ECX\\
+JZ \attach{LAB\_004777a2}\\
+
+	\target{LAB\_004776c3}
+	LAB\_004776c3:\\
+INC EAX\\
+JMP \attach{LAB\_004779f6}\\
+
+	\target{LAB\_004777a2}
+	LAB\_004777a2:\\
+MOV EDX, dword ptr [EAX]\\
+MOV ESI, dword ptr [EAX+ 0xc]\\
+LEA ECX, [EAX + 0x14]\\
+MOV EAX, dword ptr [EAX+ 0x10]\\
+XOR EAX, EDX\\
+XOR ESI, EDX\\
+MOV dword ptr [EBP + local10], ECX\\
+MOV dword ptr [EBP + param2], EDX\\
+MOV dword ptr [EBP + param1], EAX\\
+TEST ECX, ECX\\
+JZ \attach{LAB\_00477a0a} $\rightarrow$ non preso \\
+CMP ESI, EAX\\
+JA \attach{LAB\_00477a0a} $\rightarrow$ non preso \\
+ADD ECX, ESI\\
+CMP ECX, EDI\\
+JA \attach{LAB\_00477a0a} $\rightarrow$ non preso\\
+MOV EDI, dword ptr [->KERNEL32.DLL::VirtualAlloc]\\
+PUSH 0x4 \\
+PUSH 0x3000\\
+PUSH ESI\\
+PUSH 0x0 \\
+CALL EDI ;=> KERNEL32.DLL::VirtualAlloc\\
+MOV EBX, EAX\\
+XOR EDX, EDX\\
+MOV dword ptr [EBP + local\_gc], EBX\\
+CMP EBX, EDX\\
+
+\noindent
+JZ \attach{LAB\_00477a0a} $\rightarrow$ non preso: controllo che il ritorno di virtual alloc sia diverso da 0\\
+
+\noindent
+MOV dword ptr [EBP + local\_g8], EDX\\
+MOV EAX, FS:[0x18]\\
+MOV EAX, dword ptr [EAX + 0X30]\\
+MOVZX EAX, byte ptr [EAX + 0x2]\\
+MOV dword ptr [EBP + local\_g8], EAX\\
+CMP dword ptr [EBP + local\_g8], EDX \\
+JZ \attach{LAB\_00477948}\\
+XOR EAX, EAX\\
+MOV dword ptr [EBP + local30], 0x6e72656b\\
+MOV dword ptr [EBP + local2c], 0x32336c65\\
+MOV dword ptr [EBP + local28], 0x6c6c642e\\
+LEA EDI, [EBP + -0x20]\\
+STOSB ES:EDI\\
+MOV dword ptr [EBP + local20], 0x6f6c6c41\\
+MOV dword ptr [EBP + local1c], 0x6e6f4363 \\
+MOV dword ptr [EBP + local18], 0x656c6f73\\
+LEA EDI, [EDI + -0x10]\\
+STOSB ES:EDI\\
+LEA EAX, [EBP + -0x1c]\\
+PUSH EAX\\
+LEA EAX, [EBP + -0x2c]\\
+PUSH EAX \\
+CALL dword ptr [->KERNEL32.DLL::GetModuleHandleA]\\
+PUSH EAX\\
+CALL dword ptr [->KERNEL32.DLL::GetProcAddress]\\
+PUSH ESI\\
+PUSH EAX\\
+PUSH EBX\\
+CALL FID\_conflict:\_memcpy\\
+ADD ESP, 0xc \\
+
+	\target{LAB\_00477073}
+	LAB\_00477073:\\
+MOV EAX, EBX\\
+JMP \attach{LAB\_004774f8}\\
+
+	\target{	LAB\_00477948}
+	LAB\_00477948:\\
+MOV EAX, dword ptr [EBP + param2]\\
+ADD EAX, 0xa078c405\\
+MOV dword ptr [EBP + param2], EAX\\
+CMP ESI, EDX\\
+JBE \attach{LAB\_004777eb}\\
+MOV EAX, dword ptr [EBP + local10]\\
+SUB EAX, EBX \\
+MOV dword ptr [EBP + local10], EAX\\
+
+	\target{	LAB\_0047749c}
+	LAB\_0047749c:\\
+MOV EAX, dword ptr [EBP + param2]\\
+MOV CL, DL \\
+AND CL, 0x1f\\
+ROL EAX, CL $\rightarrow$ CL = 0: nessuna rotazione \\
+MOV ECX, dword ptr [EBP + param2]\\
+ROR ECX, 0x3 \\
+ADD EAX, ECX \\
+MOV ECX, EDX \\
+ROR ECX, 0xb\\
+ADD ECX, 0x72462828\\
+XOR EAX, ECX\\
+MOV ECX, dword ptr [EBP + local10]\\
+MOV dword ptr [EBP + param2], EAX \\
+LEA EAX, [EDX + EBX * 0x1]\\
+MOV CL, byte ptr [ECX + EAX * 0x1]\\
+XOR CL, byte ptr [EBP + param2]\\
+mov EBX, dword ptr [EBP, local\_gc]\\
+INC EDX\\
+MOV byte ptr [EAX], CL \\
+CMP EDX, ESI \\
+JC \attach{LAB\_0047749c}\\
+
+	\target{	LAB\_004777eb}
+	LAB\_004777eb:\\
+CMP ESI, dword ptr [EBP + param1]\\
+JZ LAB\_00477073\\
+PUSH 0x4 \\
+PUSH 0x3000\\ 
+PUSH dword ptr [EBP + param1]\\
+PUSH 0x0 \\
+CALL EDI ;=> KERNEL32.DLL::VirtualAlloc\\
+MOV EDI, dword ptr [KERNEL32.DLL::VirtualFree]\\
+MOV dword ptr [EBP + param2], EAX\\
+TEST EAX, EAX\\
+JZ \attach{LAB\_004772d6}\\
+CALL FUN\_0046e870 \\
+PUSH ESI\\
+PUSH EBX\\
+LEA EAX, [EBP + 0x8]\\
+PUSH EAX\\
+PUSH dword ptr [EBP + param2]\\
+CALL FUN\_0046e940\\
+ADD ESP, 0x10 \\
+PUSH 0x8000\\
+PUSH 0x0 \\
+TEST EAX, EAX \\
+JZ \attach{LAB\_00477a07} \\
+PUSH dword ptr [EBP + param2]\\
+CALL EDI ;=>KERNEL32.DLL::VirtualFree\\
+
+	\target{	LAB\_004772d6}
+	LAB\_004772d6:\\
+PUSH 0x8000 \\
+PUSH 0x0 \\
+PUSH EBX\\
+CALL EDI ;=>KERNEL32.DLL::VirtualFree\\
+JMP \attach{LAB\_00477a0a} \\
+
+	\target{	LAB\_00477a07}
+	LAB\_00477a07:\\
+PUSH EBX \\
+CALL dword ptr [->KERNEL32.DLL::VirtualFree]\\
+MOV EAX dword ptr [EBP + param2]\\
+JMP \attach{LAB\_004774f8}\\
+\end{document}

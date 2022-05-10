@@ -1,0 +1,6 @@
+*.toc
+*.synctex.*
+*.out 
+*.log
+*.swp
+*.bak
