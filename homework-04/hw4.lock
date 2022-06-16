@@ -1,9 +1,9 @@
 #Ghidra Lock File
-#Thu May 05 19:12:30 CEST 2022
+#Wed Jun 15 15:47:00 CEST 2022
 OS\ Name=Linux
-OS\ Version=5.4.0-107-generic
+OS\ Version=5.4.0-110-generic
 Username=luca
 Hostname=luca-XPS-13-9343
 <META>\ Supports\ File\ Channel\ Locking=Channel Lock
 OS\ Architecture=amd64
-Timestamp=5/5/22, 7\:12 PM
+Timestamp=6/15/22, 3\:47 PM
